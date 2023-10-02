@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reconstructions - Brain2Video</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400;1,700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<!-- ... (rest of the head) ... -->
+
+<body>
+    <div class="content-container">    
+        <section id="title-card">
+            <h1>Reconstructions Gallery</h1>
+
+        </section>
+
+        <!-- Controls to Add/Remove Reconstructed GIFs Columns -->
+        <h3 class="instructions">Click on the buttons below to add or remove reconstructions with different methods.</h3>
+
+        <div class="controls">
+
+            <button class="toggle-btn" data-folder="gifs/BMDgeneral_sub01_blip_avgrepsFalse">BMDgeneral_sub01_blip_avgrepsFalse</button>
+            <button class="toggle-btn" data-folder="gifs/BMDgeneral_sub01_blip_avgrepsFalse_lf3">BMDgeneral_sub01_blip_avgrepsFalse_lf3</button>
+  
+        </div>
+
+        <section id="gifs-section">
+
+
+            <div class="columns-container">
+                <div class="column gif-names" id="gif-names-column">
+                    <div class="column-title">Video ID</div>
+
+                    <!-- GIF names will be loaded here by JavaScript -->
+                </div>
+                <!-- Ground Truth Column -->
+                <div class="column ground-truth" id="ground-truth-column">
+                    <div class="column-title">Ground Truth Video</div>
+
+                    <!-- GIFs will be loaded here by JavaScript -->
+                </div>
+
+                <!-- Dynamic Columns Container -->
+                <div id="dynamic-columns">
+                    <!-- Columns for reconstructed GIFs will be added here dynamically -->
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+    <!-- JavaScript to handle dynamic columns -->
+    <script>
+        document.querySelectorAll('.toggle-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                let folder = this.getAttribute('data-folder');
+                if (this.classList.contains('active')) {
+                    // If the button is active, remove the column
+                    this.classList.remove('active');
+                    removeColumn(folder);
+                } else {
+                    // If the button is not active, add the column
+                    this.classList.add('active');
+                    addColumn(folder);
+                }
+            });
+        });
+
+        function addColumn(folder) {
+            let column = document.createElement('div');
+            column.className = 'column reconstructed';
+            column.setAttribute('data-folder', folder); // Set a data attribute to identify the column later
+            
+            // Add title to the column
+            let titleElement = document.createElement('div');
+            titleElement.className = 'column-title';
+            titleElement.textContent = folder.split('/').pop(); // Extracting the folder name for the title
+            column.appendChild(titleElement);
+
+            for (let i = 1001; i <= 1102; i++) {
+                let gifNumber = i.toString().padStart(4, '0');
+                let gifElement = document.createElement('img');
+                gifElement.src = `${folder}/gif/${gifNumber}.gif`;
+                gifElement.alt = `${folder} gif ${gifNumber}`;
+                column.appendChild(gifElement);
+            }
+            
+            document.getElementById('dynamic-columns').appendChild(column);
+        }
+
+        function removeColumn(folder) {
+            let columns = document.querySelectorAll(`.column.reconstructed[data-folder="${folder}"]`);
+            if (columns.length > 0) {
+                columns[0].remove();
+            }
+        }
+    </script>
+
+
+    <script>
+        for (let i = 1001; i <= 1102; i++) {
+            let gifNumber = i.toString().padStart(4, '0'); // This will convert 1 to 0001, 2 to 0002, etc.
+                
+            // Create and append the GIF name
+            let nameElement = document.createElement('div');
+            nameElement.className = 'gif-name';
+            nameElement.textContent = `${gifNumber}`;
+            document.getElementById('gif-names-column').appendChild(nameElement);
+
+            
+            let gifElement = document.createElement('img');
+            gifElement.src = `gifs/ground_truth/${gifNumber}.gif`;
+            gifElement.alt = `Ground truth gif ${gifNumber}`;
+            document.getElementById('ground-truth-column').appendChild(gifElement);
+        }
+    </script>
+
+</body>
+</html>
+

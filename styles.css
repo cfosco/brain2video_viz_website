@@ -48,7 +48,6 @@ h1, h2 {
 }
 
 .content-container {
-    max-width: 1000px; /* Adjust this value as needed */
     margin: 0 auto; /* This centers the container horizontally */
     padding: 0 1rem; /* Add some padding to the left and right */
 }
@@ -284,3 +283,113 @@ img {
     fill: #ffffff;
   }
   
+
+#gifs-section {
+    display: flex;
+    flex-direction: row;
+    overflow-x: visible; /* This allows horizontal scrolling */
+    white-space: nowrap; /* This ensures the columns don't wrap to the next line */
+}
+
+.ground-truth {
+    flex: none; /* This ensures the columns don't grow or shrink */
+    width: auto; /* Adjust this value based on your desired width for the ground truth column */
+    padding: 10px;
+    /* border-right: 1px solid #ccc; */
+    /* flex-shrink: 0; This ensures the ground truth column doesn't shrink */
+}
+.column.reconstructed {
+    flex: none; /* This ensures the columns don't grow or shrink */
+    width: auto; /* Adjust this value based on your desired width for the dynamic columns */
+    padding: 10px;
+}
+
+.controls {
+    display: flex;
+    justify-content: center; /* Horizontally center the buttons */
+    flex-wrap: wrap; /* Allow the buttons to wrap to the next line if there's not enough space */
+    gap: 10px; /* Add some space between the buttons */
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.controls.h3 {
+    justify-content: center; /* Horizontally center the buttons */
+    display: block;
+}
+
+
+#dynamic-columns {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap; /* This ensures the columns won't wrap to the next line */
+}
+
+.column {
+    overflow-y: visible; /* This adds a scrollbar if the content overflows vertically */
+}
+
+.columns-container {
+    display: flex;
+    flex-direction: row;
+    overflow-x: visible; /* This allows horizontal scrolling */
+    white-space: nowrap; /* This ensures the columns don't wrap to the next line */
+    width: max-content; /* This makes the container's width based on its content */
+}
+
+.toggle-btn {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #ddd;
+    transition: background-color 0.3s;
+    border-radius: 10px;
+}
+
+.toggle-btn:hover {
+    background-color: #ccc;
+}
+
+.toggle-btn.active {
+    background-color: #0066cc;
+    color: white;
+}
+
+.column-title {
+    position: sticky; /* This makes the title sticky */
+    top: 0;
+    justify-content: center; /* Horizontally center the buttons */
+    background-color: #fff; /* Background color to ensure the title is readable */
+    padding: 5px 10px; /* Some padding for aesthetics */
+    z-index: 10; /* Ensure the title is above other content */
+    border-bottom: 1px solid #ccc; /* A border to separate the title from the content */
+    border-radius: 5px;
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2);
+
+}
+
+.gif-names {
+    flex: none; /* This ensures the column doesn't grow or shrink */
+    width: auto; /* Adjust this value based on your desired width for the names column */
+    padding: 10px;
+}
+
+.column img {
+    height: 264px;
+    width: auto
+}
+
+.gif-name {
+    height: 264px;
+    line-height: 264px; /* Vertically center the names */
+    margin: 1rem auto; /* Center the image horizontally */
+    text-align: right; /* Align the names to the right side of the column */
+
+}
+
+.instructions {
+    display: flex;
+    justify-content: center;
+}
