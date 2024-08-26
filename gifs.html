@@ -36,7 +36,7 @@
     <button class="toggle-btn" data-folder="gifs/BMDgeneral_sub01_blip_avgrepsFalse_lf2_regressorRidge">
      BMDgeneral_sub01_blip_avgrepsFalse_lf2_regressorRidge
     </button> -->
-    <button class="toggle-btn" data-folder="gifs/bmd_final_results_allsubj">
+    <button class="toggle-btn" id="preclicked-btn" data-folder="gifs/bmd_final_results_allsubj">
         BMD reconstructions - Sub01 Test Set - Trained on all subjects
     </button>
    </div>
@@ -125,5 +125,11 @@
             document.getElementById('ground-truth-column').appendChild(gifElement);
         }
   </script>
+  <script>
+    // Pre-click the default button when the page loads
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("preclicked-btn").click();
+    });
+</script>
  </body>
 </html>
