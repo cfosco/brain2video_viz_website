@@ -253,7 +253,8 @@ h2::after {
 }
 
 img {
-    max-height: 300px; /* Adjust this value as needed */
+    max-width: 80%; /* Ensures image scales down within its container */
+    height: auto; /* Maintains aspect ratio */
     display: block;
     margin: 1rem auto; /* Center the image horizontally */
 }
