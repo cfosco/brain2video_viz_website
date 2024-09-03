@@ -79,7 +79,89 @@
   </div>
   <!-- JavaScript to handle dynamic columns -->
    
-<script>
+  <script>
+    function checkPassword() {
+        const correctPassword = "brain2video2024";  // Replace with your desired password
+        const enteredPassword = prompt("Please enter the password:");
+
+        if (enteredPassword !== correctPassword) {
+            alert("Incorrect password. Access denied.");
+            window.location.href = "index.html";  // Redirect to index.html
+        } else {
+            document.getElementById('protected-content').style.display = 'block';
+            loadContent();  // Call the function to load content
+        }
+    }
+
+    function loadContent() {
+        // Pre-click the default button when the page loads
+        document.getElementById("preclicked-btn").click();
+
+        document.querySelectorAll('.toggle-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                let folder = this.getAttribute('data-folder');
+                if (this.classList.contains('active')) {
+                    // If the button is active, remove the column
+                    this.classList.remove('active');
+                    removeColumn(folder);
+                } else {
+                    // If the button is not active, add the column
+                    this.classList.add('active');
+                    addColumn(folder);
+                }
+            });
+        });
+
+        function addColumn(folder) {
+            let column = document.createElement('div');
+            column.className = 'column reconstructed';
+            column.setAttribute('data-folder', folder);
+
+            let titleElement = document.createElement('div');
+            titleElement.className = 'column-title';
+            titleElement.textContent = folder.split('/').pop(); 
+            column.appendChild(titleElement);
+
+            for (let i = 1; i <= 1102; i++) {
+                let gifNumber = i.toString().padStart(4, '0');
+                let gifElement = document.createElement('img');
+                gifElement.src = `${folder}/gif/${gifNumber}.gif`;
+                gifElement.alt = `${folder} gif ${gifNumber}`;
+                column.appendChild(gifElement);
+            }
+
+            document.getElementById('dynamic-columns').appendChild(column);
+        }
+
+        function removeColumn(folder) {
+            let columns = document.querySelectorAll(`.column.reconstructed[data-folder="${folder}"]`);
+            if (columns.length > 0) {
+                columns[0].remove();
+            }
+        }
+
+        // Loading GIF names and ground truth
+        for (let i = 1; i <= 1102; i++) {
+            let gifNumber = i.toString().padStart(4, '0');
+
+            let nameElement = document.createElement('div');
+            nameElement.className = 'gif-name';
+            nameElement.textContent = `${gifNumber}`;
+            document.getElementById('gif-names-column').appendChild(nameElement);
+
+            let gifElement = document.createElement('img');
+            gifElement.src = `gifs/ground_truth/${gifNumber}.gif`;
+            gifElement.alt = `Ground truth gif ${gifNumber}`;
+            document.getElementById('ground-truth-column').appendChild(gifElement);
+        }
+    }
+
+    // Run the password check when the page loads
+    window.onload = checkPassword;
+  </script>
+
+
+<!-- <script>
     function checkPassword() {
         const correctPassword = "brain2video2024";  // Replace with your desired password
         const enteredPassword = prompt("Please enter the password:");
@@ -160,6 +242,6 @@
             gifElement.alt = `Ground truth gif ${gifNumber}`;
             document.getElementById('ground-truth-column').appendChild(gifElement);
         }
-  </script>
+  </script> -->
  </body>
 </html>
