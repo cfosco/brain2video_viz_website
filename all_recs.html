@@ -86,23 +86,18 @@
             window.location.href = "index.html";  // Redirect to index.html
         } else {
             document.getElementById('protected-content').style.display = 'block';
-            loadContent();  // Call the function to load content
         }
     }
 
     function loadContent() {
-        // Pre-click the default button when the page loads
-        document.getElementById("preclicked-btn").click();
-
+        // Attach event listeners to all toggle buttons
         document.querySelectorAll('.toggle-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 let folder = this.getAttribute('data-folder');
                 if (this.classList.contains('active')) {
-                    // If the button is active, remove the column
                     this.classList.remove('active');
                     removeColumn(folder);
                 } else {
-                    // If the button is not active, add the column
                     this.classList.add('active');
                     addColumn(folder);
                 }
@@ -137,10 +132,9 @@
             }
         }
 
-        // Loading GIF names and ground truth
+        // Load GIF names and ground truth
         for (let i = 1; i <= 1102; i++) {
             let gifNumber = i.toString().padStart(4, '0');
-
             let nameElement = document.createElement('div');
             nameElement.className = 'gif-name';
             nameElement.textContent = `${gifNumber}`;
@@ -151,11 +145,17 @@
             gifElement.alt = `Ground truth gif ${gifNumber}`;
             document.getElementById('ground-truth-column').appendChild(gifElement);
         }
+
+        // Pre-click the default button when the page loads
+        document.getElementById("preclicked-btn").click();
     }
 
-    // Run the password check when the page loads
+    // Check password when the page loads
     window.onload = checkPassword;
-  </script>
+
+    // Load the content once the DOM is fully loaded
+    document.addEventListener("DOMContentLoaded", loadContent);
+</script>
 
 
 <!-- <script>
