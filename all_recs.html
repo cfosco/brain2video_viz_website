@@ -78,6 +78,27 @@
    </section>
   </div>
   <!-- JavaScript to handle dynamic columns -->
+   
+<script>
+    function checkPassword() {
+        const correctPassword = "brain2video2024";  // Replace with your desired password
+        const enteredPassword = prompt("Please enter the password:");
+
+        if (enteredPassword !== correctPassword) {
+            alert("Incorrect password. Access denied.");
+            window.location.href = "index.html";  // Redirect to a different page
+        }
+    }
+
+    // Run the password check when the page loads
+    window.onload = checkPassword;
+    
+    // Pre-click the default button when the page loads
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("preclicked-btn").click();
+    });
+</script>
+
   <script>
    document.querySelectorAll('.toggle-btn').forEach(btn => {
             btn.addEventListener('click', function() {
@@ -140,25 +161,5 @@
             document.getElementById('ground-truth-column').appendChild(gifElement);
         }
   </script>
-  <script>
-    // Pre-click the default button when the page loads
-    document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById("preclicked-btn").click();
-    });
-</script>
-<script>
-    function checkPassword() {
-        const correctPassword = "brain2video2024";  // Replace with your desired password
-        const enteredPassword = prompt("Please enter the password:");
-
-        if (enteredPassword !== correctPassword) {
-            alert("Incorrect password. Access denied.");
-            window.location.href = "index.html";  // Redirect to a different page
-        }
-    }
-
-    // Run the password check when the page loads
-    window.onload = checkPassword;
-</script>
  </body>
 </html>
