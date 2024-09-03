@@ -76,7 +76,23 @@
    </section>
   </div>
    
-  <script>
+<!--
+        // Attach event listeners to all toggle buttons
+        document.querySelectorAll('.toggle-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                let folder = this.getAttribute('data-folder');
+                if (this.classList.contains('active')) {
+                    this.classList.remove('active');
+                    removeColumn(folder);
+                } else {
+                    this.classList.add('active');
+                    addColumn(folder);
+                }
+            });
+        });
+-->
+
+<script>
     function checkPassword() {
         const correctPassword = "brain2video2024";  // Replace with your desired password
         const enteredPassword = prompt("Please enter the password:");
@@ -94,13 +110,18 @@
         document.querySelectorAll('.toggle-btn').forEach(btn => {
             btn.addEventListener('click', function() {
                 let folder = this.getAttribute('data-folder');
-                if (this.classList.contains('active')) {
-                    this.classList.remove('active');
-                    removeColumn(folder);
-                } else {
-                    this.classList.add('active');
-                    addColumn(folder);
-                }
+
+                // Deactivate all buttons and remove their associated columns
+                document.querySelectorAll('.toggle-btn').forEach(button => {
+                    if (button.classList.contains('active')) {
+                        button.classList.remove('active');
+                        removeColumn(button.getAttribute('data-folder'));
+                    }
+                });
+
+                // Activate the clicked button and add its column
+                this.classList.add('active');
+                addColumn(folder);
             });
         });
 
@@ -157,88 +178,5 @@
     document.addEventListener("DOMContentLoaded", loadContent);
 </script>
 
-
-<!-- <script>
-    function checkPassword() {
-        const correctPassword = "brain2video2024";  // Replace with your desired password
-        const enteredPassword = prompt("Please enter the password:");
-
-        if (enteredPassword !== correctPassword) {
-            alert("Incorrect password. Access denied.");
-            window.location.href = "index.html";  // Redirect to a different page
-        }
-    }
-
-    // Run the password check when the page loads
-    window.onload = checkPassword;
-
-    // Pre-click the default button when the page loads
-    document.addEventListener("DOMContentLoaded", function() {
-        document.getElementById("preclicked-btn").click();
-    });
-</script>
-
-  <script>
-   document.querySelectorAll('.toggle-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                let folder = this.getAttribute('data-folder');
-                if (this.classList.contains('active')) {
-                    // If the button is active, remove the column
-                    this.classList.remove('active');
-                    removeColumn(folder);
-                } else {
-                    // If the button is not active, add the column
-                    this.classList.add('active');
-                    addColumn(folder);
-                }
-            });
-        });
-
-        function addColumn(folder) {
-            let column = document.createElement('div');
-            column.className = 'column reconstructed';
-            column.setAttribute('data-folder', folder); // Set a data attribute to identify the column later
-            
-            // Add title to the column
-            let titleElement = document.createElement('div');
-            titleElement.className = 'column-title';
-            titleElement.textContent = folder.split('/').pop(); // Extracting the folder name for the title
-            column.appendChild(titleElement);
-
-            for (let i = 1; i <= 1102; i++) {
-                let gifNumber = i.toString().padStart(4, '0');
-                let gifElement = document.createElement('img');
-                gifElement.src = `${folder}/gif/${gifNumber}.gif`;
-                gifElement.alt = `${folder} gif ${gifNumber}`;
-                column.appendChild(gifElement);
-            }
-            
-            document.getElementById('dynamic-columns').appendChild(column);
-        }
-
-        function removeColumn(folder) {
-            let columns = document.querySelectorAll(`.column.reconstructed[data-folder="${folder}"]`);
-            if (columns.length > 0) {
-                columns[0].remove();
-            }
-        }
-  </script>
-  <script>
-   for (let i = 1; i <= 1102; i++) {
-            let gifNumber = i.toString().padStart(4, '0'); // This will convert 1 to 0001, 2 to 0002, etc.
-                
-            // Create and append the GIF name
-            let nameElement = document.createElement('div');
-            nameElement.className = 'gif-name';
-            nameElement.textContent = `${gifNumber}`;
-            document.getElementById('gif-names-column').appendChild(nameElement);
-
-            
-            let gifElement = document.createElement('img');
-            gifElement.src = `gifs/ground_truth/${gifNumber}.gif`;
-            gifElement.alt = `Ground truth gif ${gifNumber}`;
-            document.getElementById('ground-truth-column').appendChild(gifElement);
-        }
-  </script> -->
  </body>
 </html>
