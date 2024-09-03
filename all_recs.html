@@ -13,7 +13,7 @@
   <link href="styles.css" rel="stylesheet"/>
  </head>
  <body>
-  <div class="content-container">
+  <div class="content-container" style="display:none;" id="protected-content">
    <section id="title-card">
     <h1>
      Reconstructions Gallery
@@ -68,16 +68,13 @@
       <div class="column-title">
        Ground Truth Video
       </div>
-      <!-- GIFs will be loaded here by JavaScript -->
      </div>
-     <!-- Dynamic Columns Container -->
      <div id="dynamic-columns">
       <!-- Columns for reconstructed GIFs will be added here dynamically -->
      </div>
     </div>
    </section>
   </div>
-  <!-- JavaScript to handle dynamic columns -->
    
   <script>
     function checkPassword() {
