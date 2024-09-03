@@ -92,7 +92,7 @@
 
     // Run the password check when the page loads
     window.onload = checkPassword;
-    
+
     // Pre-click the default button when the page loads
     document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("preclicked-btn").click();
@@ -126,7 +126,7 @@
             titleElement.textContent = folder.split('/').pop(); // Extracting the folder name for the title
             column.appendChild(titleElement);
 
-            for (let i = 1001; i <= 1102; i++) {
+            for (let i = 1; i <= 1102; i++) {
                 let gifNumber = i.toString().padStart(4, '0');
                 let gifElement = document.createElement('img');
                 gifElement.src = `${folder}/gif/${gifNumber}.gif`;
